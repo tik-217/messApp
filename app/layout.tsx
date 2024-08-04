@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Noto_Serif } from "next/font/google";
 import "@/app/globals.scss";
+import StoreProvider from "@/app/StoreProvider";
 
 const noto = Noto_Serif({ subsets: ["latin"] });
 
@@ -16,7 +17,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={noto.className}>{children}</body>
+      <body className={noto.className}>
+        <StoreProvider>{children}</StoreProvider>
+      </body>
     </html>
   );
 }

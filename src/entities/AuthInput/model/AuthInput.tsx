@@ -20,11 +20,11 @@ export default function AuthInput({
         id={name}
         name={name}
         type={type}
-        className={styles.formItemSection__item}
         placeholder={placeholder}
-        onChange={handleChange}
         onBlur={onBlur}
+        onChange={handleChange}
         value={value}
+        className={styles.formItemSection__item}
       />
       <span className={styles.formItemSection__errorText}>
         {touched && errorType ? <div>{errorType}</div> : null}

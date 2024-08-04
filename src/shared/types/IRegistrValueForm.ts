@@ -3,4 +3,6 @@ export interface IRegistrValueForm<T> {
   lastName: T;
   phone: T;
   email: T;
+  password: T;
+  confirmPassword: T;
 }
