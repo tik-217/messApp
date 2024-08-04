@@ -1,0 +1,9 @@
+@import "@/shared/ui/mixins.scss";
+
+.login {
+  @include rootElemCenterPosition;
+
+  &__title {
+    @include authTitle;
+  }
+}
