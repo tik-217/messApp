@@ -1,0 +1,28 @@
+.formItemSection {
+  width: -webkit-fill-available;
+  position: relative;
+
+  &__item {
+    padding: 15px 18px;
+    border-radius: 15px;
+    outline: none;
+    box-shadow: none;
+    border: 2px solid #eeeeee;
+    margin-bottom: 15px;
+    width: inherit;
+
+    &::placeholder {
+      color: #d8d8d8;
+    }
+  }
+
+  &__errorText {
+    position: absolute;
+    top: -5px;
+    left: 20px;
+
+    font-size: 12px;
+    color: #ff8383;
+    margin: 0;
+  }
+}
