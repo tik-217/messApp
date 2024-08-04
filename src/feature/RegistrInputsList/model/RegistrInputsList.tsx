@@ -37,6 +37,16 @@ export default function RegistrInputsList({
         handleChange={handleChange}
       />
       <AuthInput
+        type={"email"}
+        placeholder={"Email"}
+        name={"email"}
+        errorType={errors.email}
+        touched={touched.email}
+        value={value.email}
+        onBlur={onBlur}
+        handleChange={handleChange}
+      />
+      <AuthInput
         type={"phone"}
         placeholder={"Номер телеофна"}
         name={"phone"}
@@ -47,12 +57,22 @@ export default function RegistrInputsList({
         handleChange={handleChange}
       />
       <AuthInput
-        type={"email"}
-        placeholder={"Email"}
-        name={"email"}
-        errorType={errors.email}
-        touched={touched.email}
-        value={value.email}
+        type={"password"}
+        placeholder={"Пароль"}
+        name={"password"}
+        errorType={errors.password}
+        touched={touched.password}
+        value={value.password}
+        onBlur={onBlur}
+        handleChange={handleChange}
+      />
+      <AuthInput
+        type={"password"}
+        placeholder={"Подтвердите пароль"}
+        name={"confirmPassword"}
+        errorType={errors.confirmPassword}
+        touched={touched.confirmPassword}
+        value={value.confirmPassword}
         onBlur={onBlur}
         handleChange={handleChange}
       />

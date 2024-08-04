@@ -23,5 +23,13 @@ export const validate = () => {
       .email("Invalid email address")
       .required(requiredFilling)
       .trim(),
+    password: Yup.string()
+      .required("Password is required")
+      .min(5, "Your password is too short.")
+      .matches(/[a-zA-Z]/, "Password can only contain Latin letters."),
+    confirmPassword: Yup.string().oneOf(
+      [Yup.ref("password")],
+      "Passwords must match"
+    ),
   });
 };

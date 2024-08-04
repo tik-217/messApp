@@ -26,6 +26,16 @@ export default function LoginInputsList({
         onBlur={onBlur}
         handleChange={handleChange}
       />
+      <AuthInput
+        type={"password"}
+        placeholder={"Пароль"}
+        name={"password"}
+        errorType={errors.password}
+        touched={touched.password}
+        value={value.password}
+        onBlur={onBlur}
+        handleChange={handleChange}
+      />
     </div>
   );
 }

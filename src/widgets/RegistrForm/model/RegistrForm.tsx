@@ -3,6 +3,14 @@
 // next
 import Link from "next/link";
 
+// firebase/auth
+import {
+  createUserWithEmailAndPassword,
+  getAuth,
+  onAuthStateChanged,
+} from "firebase/auth";
+import app from "@/root/initFirebase";
+
 // formik
 import { useFormik } from "formik";
 
@@ -17,14 +25,19 @@ import styles from "../ui/RegistrForm.module.scss";
 
 // utils
 import { validate } from "../utils/validate";
+import { formTrim } from "@/shared/services/formTrim";
 
 export default function RegistrForm() {
+  const auth = getAuth(app);
+
   const formik = useFormik({
     initialValues: {
       firstName: "",
       lastName: "",
       phone: "",
       email: "",
+      password: "",
+      confirmPassword: "",
     },
     validationSchema: validate,
     onSubmit: (values) => {
@@ -33,6 +46,33 @@ export default function RegistrForm() {
       for (const key in values) {
         formik.values[key as IKey] = values[key as IKey].trim();
       }
+
+      formTrim(formik.values);
+
+      createUserWithEmailAndPassword(
+        auth,
+        formik.values.email,
+        formik.values.password
+      )
+        .then((userCredential) => {
+          const user = userCredential.user;
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+        });
+
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          // User is signed in, see docs for a list of available properties
+          // https://firebase.google.com/docs/reference/js/auth.user
+          const uid = user.uid;
+          // ...
+        } else {
+          // User is signed out
+          // ...
+        }
+      });
     },
   });
 
