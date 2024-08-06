@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import initialState from "@/shared/store/initialState";
+import initialState from "@/shared/store/formSlice/initialState";
 
 export const formSlice = createSlice({
   name: "formSlice",
