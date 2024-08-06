@@ -1,0 +1,18 @@
+.messApp {
+  background: #a1b8cd;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  width: 100%;
+
+  &__wrapper {
+    display: flex;
+    max-width: 1200px;
+    margin: 0 10px;
+    width: 100%;
+    height: 100%;
+
+    position: relative;
+  }
+}

@@ -1,10 +1,15 @@
-import formSlice from "@/shared/store/reducer";
+// redux
 import { configureStore } from "@reduxjs/toolkit";
+
+// slices
+import formSlice from "@/shared/store/formSlice/formSlice";
+import menuSlice from "@/shared/store/menuSlice/menuSlice";
 
 export const makeStore = () => {
   return configureStore({
     reducer: {
       formState: formSlice,
+      menuState: menuSlice,
     },
   });
 };

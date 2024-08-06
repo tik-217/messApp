@@ -1,0 +1,72 @@
+$imageHeight: 55px;
+$marginTop: $imageHeight / 4;
+
+.miniChat {
+  display: flex;
+  margin-bottom: 7px;
+  margin-top: 7px;
+
+  padding-top: 7px;
+  padding-bottom: 7px;
+  padding-left: 16px;
+  padding-right: 16px;
+
+  float: left;
+  cursor: pointer;
+
+  &:hover {
+    background: #a1b8cd8a;
+  }
+
+  &__imageWrap {
+    margin: 0;
+    height: $imageHeight;
+    width: $imageHeight;
+  }
+
+  &__image {
+    height: 100%;
+    width: 100%;
+  }
+
+  &__rescipient {
+    position: relative;
+
+    margin: 0;
+    margin-left: 10px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+    flex: 1;
+
+    &::after {
+      content: "";
+      display: block;
+      border-top: 1px solid #d9d9d9;
+      position: absolute;
+      top: -$marginTop;
+      left: 0;
+      width: 90%;
+      height: 1px;
+    }
+  }
+
+  &__name {
+    margin: 0;
+
+    font-size: 15px;
+  }
+
+  &__lastMess {
+    font-size: 14px;
+    margin: 0;
+    color: #919191;
+
+    width: 170px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}

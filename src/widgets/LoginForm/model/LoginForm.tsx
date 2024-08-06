@@ -25,7 +25,7 @@ import {
 } from "firebase/auth";
 import firebaseApp from "@/root/initFirebase";
 import { useAppDispatch, useAppSelector } from "@/shared/store/hooks";
-import { setIsLoading } from "@/shared/store/reducer";
+import { setIsLoading } from "@/shared/store/formSlice/formSlice";
 
 export default function LoginForm() {
   const auth = getAuth(firebaseApp);

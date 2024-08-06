@@ -1,0 +1,36 @@
+.messagesList {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: 100%;
+  overflow: hidden;
+  scroll-snap-type: none;
+
+  &__wrapper {
+    width: 100%;
+    overflow: scroll;
+    scroll-snap-align: start;
+    padding: 0 10px;
+    box-sizing: border-box;
+  }
+
+  &__recipient,
+  &__sender {
+    scroll-snap-align: start;
+    border-radius: 10px;
+    background: #fff;
+    max-width: 300px;
+    padding: 11px 18px;
+    margin: 15px 0;
+  }
+
+  &__recipient {
+    width: 60%;
+    margin-right: auto;
+  }
+
+  &__sender {
+    width: 60%;
+    margin-left: auto;
+  }
+}

@@ -1,0 +1,19 @@
+.inputMessage {
+  width: 100%;
+  background: #fff;
+  padding: 0 20px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 5px 5px 0 0;
+  align-items: center;
+  box-shadow: 0px -17px 35px -2px rgba(34, 60, 80, 0.15);
+
+  &__input {
+    border: none;
+    outline: none;
+    margin: 15px 0;
+    width: 80%;
+    resize: none;
+  }
+}
