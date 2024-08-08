@@ -12,7 +12,7 @@ import checkRegister from "@/shared/services/checkRegister";
 // store
 import { setIsLoading } from "@/shared/store/formSlice/formSlice";
 import { useAppDispatch } from "@/shared/store/hooks";
-import { setUserAlreadyExist } from "@/shared/store/userSlice/userSlice";
+import { setUserAlreadyExist } from "@/shared/store/authSlice/authSlice";
 
 export default function useSignUp({
   isSubmitting,

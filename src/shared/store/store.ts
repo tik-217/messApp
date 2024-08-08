@@ -5,6 +5,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import formSlice from "@/shared/store/formSlice/formSlice";
 import menuSlice from "@/shared/store/menuSlice/menuSlice";
 import userSlice from "@/shared/store/userSlice/userSlice";
+import authSlice from "@/shared/store/authSlice/authSlice";
 
 export const makeStore = () => {
   return configureStore({
@@ -12,6 +13,7 @@ export const makeStore = () => {
       formState: formSlice,
       menuState: menuSlice,
       userState: userSlice,
+      authState: authSlice,
     },
   });
 };
