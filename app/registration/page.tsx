@@ -1,3 +1,3 @@
-import Registration from "@/views/Registration/model/Registration";
+import Registration from "@/views/Registration/ui/Registration";
 
 export default Registration;
