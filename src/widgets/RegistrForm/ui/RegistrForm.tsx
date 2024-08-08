@@ -3,7 +3,7 @@
 // next /react
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { MutableRefObject, useEffect, useRef } from "react";
+import { useEffect } from "react";
 
 // formik
 import { useFormik } from "formik";
@@ -30,7 +30,7 @@ export default function RegistrForm() {
   const router = useRouter();
 
   const userAlreadyRegistered = useAppSelector(
-    (state) => state.userState.userAlreadyExist
+    (state) => state.authState.userAlreadyExist
   );
 
   const formik = useFormik({
