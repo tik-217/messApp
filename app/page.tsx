@@ -1,3 +1,3 @@
-import Home from "@/views/Home/model/Home";
+import Home from "@/views/Home/ui/Home";
 
 export default Home;

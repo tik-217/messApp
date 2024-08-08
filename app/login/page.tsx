@@ -1,3 +1,3 @@
-import Login from "@/views/Login/model/Login";
+import Login from "@/views/Login/ui/Login";
 
 export default Login;
