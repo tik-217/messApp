@@ -1,6 +1,6 @@
 "use client";
 
-import { MutableRefObject, useLayoutEffect, useRef } from "react";
+import { MutableRefObject, useEffect, useRef } from "react";
 import styles from "../ui/MessagesList.module.scss";
 
 export default function MessagesList() {
@@ -15,7 +15,7 @@ export default function MessagesList() {
     });
   }
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     lastMessageScroll();
   }, []);
 

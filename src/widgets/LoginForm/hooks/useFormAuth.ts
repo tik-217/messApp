@@ -16,6 +16,7 @@ export default function useFormAuth() {
     validationSchema: validate,
     onSubmit: (values) => {
       formTrim(values);
+      formik.setSubmitting(false);
     },
   });
 
