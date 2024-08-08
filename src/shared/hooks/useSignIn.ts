@@ -2,52 +2,66 @@
 import { useState } from "react";
 
 // firebase
-import firebaseApp from "@/root/initFirebase";
-import { signInWithEmailAndPassword, getAuth } from "firebase/auth/cordova";
+import app from "@/root/initFirebase";
+import {
+  signInWithEmailAndPassword,
+  getAuth,
+} from "firebase/auth/web-extension";
+
+// services
+import checkTwoStrings from "@/shared/services/checkTwoStrings";
 
 // store
 import { useAppDispatch } from "@/shared/store/hooks";
 import { setIsLoading } from "@/shared/store/formSlice/formSlice";
 import { setUserEmail } from "@/shared/store/userSlice/userSlice";
+import { setLoginInvalidCred } from "@/shared/store/authSlice/authSlice";
 
 interface IUseSignIn {
   isSubmitting: boolean;
+  isValid: boolean;
   emailOrPhoneValue: string;
   passwordValue: string;
 }
 
 export default function useSignIn({
   isSubmitting,
+  isValid,
   emailOrPhoneValue,
   passwordValue,
 }: IUseSignIn) {
-  const [isAuth, setIsAuth] = useState(false);
+  const [authOk, setAuthOk] = useState(false);
   const dispatch = useAppDispatch();
 
-  if (isSubmitting) {
-    const auth = getAuth(firebaseApp);
+  dispatch(setIsLoading(true));
 
-    dispatch(setIsLoading(true));
+  if (isSubmitting && isValid) {
+    const auth = getAuth(app);
 
     signInWithEmailAndPassword(auth, emailOrPhoneValue, passwordValue)
       .then((userCredential) => {
         const userEmail = userCredential.user.email;
 
         userEmail && dispatch(setUserEmail(userEmail));
-        setIsAuth(true);
+        setAuthOk(true);
       })
       .catch((error) => {
         const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode);
-        console.log(errorMessage);
 
-        setIsAuth(false);
+        const invalidCredential = "invalid-credential";
+
+        const isInvalidCredential = checkTwoStrings({
+          errorCode,
+          errorType: invalidCredential,
+        });
+
+        dispatch(setLoginInvalidCred(isInvalidCredential));
+        setAuthOk(false);
       })
       .finally(() => {
         dispatch(setIsLoading(false));
       });
   }
 
-  return isAuth;
+  return authOk;
 }

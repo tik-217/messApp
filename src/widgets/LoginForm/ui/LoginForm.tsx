@@ -29,6 +29,7 @@ export default function LoginForm() {
   const formik = useFormAuth();
   const isAuth = useSignIn({
     isSubmitting: formik.isSubmitting,
+    isValid: formik.isValid,
     emailOrPhoneValue: formik.values.emailOrPhone,
     passwordValue: formik.values.password,
   });
@@ -41,8 +42,8 @@ export default function LoginForm() {
 
   return (
     <>
-      {!isLoading ? (
-        <form className={styles.form} onSubmit={(e) => formik.handleSubmit(e)}>
+      {isLoading ? (
+        <form className={styles.form} onSubmit={formik.handleSubmit}>
           <LoginInputsList
             errors={formik.errors}
             touched={formik.touched}

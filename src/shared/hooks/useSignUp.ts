@@ -7,24 +7,26 @@ import { getAuth } from "firebase/auth/web-extension";
 import { createUserWithEmailAndPassword } from "firebase/auth/web-extension";
 
 //
-import checkRegister from "@/shared/services/checkRegister";
+import checkTwoStrings from "@/shared/services/checkTwoStrings";
 
 // store
 import { setIsLoading } from "@/shared/store/formSlice/formSlice";
 import { useAppDispatch } from "@/shared/store/hooks";
 import { setUserAlreadyExist } from "@/shared/store/authSlice/authSlice";
 
+interface IUserSignUp {
+  isSubmitting: boolean;
+  isValid: boolean;
+  email: string;
+  password: string;
+}
+
 export default function useSignUp({
   isSubmitting,
   isValid,
   email,
   password,
-}: {
-  isSubmitting: boolean;
-  isValid: boolean;
-  email: string;
-  password: string;
-}) {
+}: IUserSignUp) {
   const [authOk, setAuthOk] = useState(false);
   const dispatch = useAppDispatch();
 
@@ -41,7 +43,12 @@ export default function useSignUp({
       .catch((error) => {
         const errorCode: string = error.code;
 
-        const isAlreadyRegistred = checkRegister({ errorCode });
+        const alreadyInUse = "already-in-use";
+
+        const isAlreadyRegistred = checkTwoStrings({
+          errorCode,
+          errorType: alreadyInUse,
+        });
 
         setUserAlreadyExist(isAlreadyRegistred);
         setAuthOk(false);
