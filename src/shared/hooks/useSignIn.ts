@@ -1,5 +1,5 @@
 // react
-import { useState } from "react";
+import { useEffect } from "react";
 
 // firebase
 import app from "@/root/initFirebase";
@@ -12,10 +12,13 @@ import {
 import checkTwoStrings from "@/shared/services/checkTwoStrings";
 
 // store
-import { useAppDispatch } from "@/shared/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/shared/store/hooks";
 import { setIsLoading } from "@/shared/store/formSlice/formSlice";
 import { setUserEmail } from "@/shared/store/userSlice/userSlice";
-import { setLoginInvalidCred } from "@/shared/store/authSlice/authSlice";
+import {
+  setGeneralErrorLogin,
+  setLoginInvalidCred,
+} from "@/shared/store/authSlice/authSlice";
 
 interface IUseSignIn {
   isSubmitting: boolean;
@@ -30,38 +33,44 @@ export default function useSignIn({
   emailOrPhoneValue,
   passwordValue,
 }: IUseSignIn) {
-  const [authOk, setAuthOk] = useState(false);
+  const generalErrorLogin = useAppSelector(
+    (state) => state.authState.generalErrorLogin
+  );
   const dispatch = useAppDispatch();
 
-  dispatch(setIsLoading(true));
+  useEffect(() => {
+    dispatch(setIsLoading(true));
 
-  if (isSubmitting && isValid) {
-    const auth = getAuth(app);
+    if (isSubmitting && isValid) {
+      dispatch(setGeneralErrorLogin(false));
+      const auth = getAuth(app);
 
-    signInWithEmailAndPassword(auth, emailOrPhoneValue, passwordValue)
-      .then((userCredential) => {
-        const userEmail = userCredential.user.email;
+      signInWithEmailAndPassword(auth, emailOrPhoneValue, passwordValue)
+        .then((userCredential) => {
+          const userEmail = userCredential.user.email;
 
-        userEmail && dispatch(setUserEmail(userEmail));
-        setAuthOk(true);
-      })
-      .catch((error) => {
-        const errorCode = error.code;
+          userEmail && dispatch(setUserEmail(userEmail));
+        })
+        .catch((error) => {
+          const errorCode = error.code;
 
-        const invalidCredential = "invalid-credential";
+          const invalidCredential = "invalid-credential";
 
-        const isInvalidCredential = checkTwoStrings({
-          errorCode,
-          errorType: invalidCredential,
+          const isInvalidCredential = checkTwoStrings({
+            errorCode,
+            errorType: invalidCredential,
+          });
+
+          dispatch(setLoginInvalidCred(isInvalidCredential));
+          dispatch(setGeneralErrorLogin(true));
+        })
+        .finally(() => {
+          if (generalErrorLogin) {
+            dispatch(setIsLoading(false));
+          } else {
+            dispatch(setIsLoading(true));
+          }
         });
-
-        dispatch(setLoginInvalidCred(isInvalidCredential));
-        setAuthOk(false);
-      })
-      .finally(() => {
-        dispatch(setIsLoading(false));
-      });
-  }
-
-  return authOk;
+    }
+  }, [isSubmitting, isValid, generalErrorLogin]);
 }
