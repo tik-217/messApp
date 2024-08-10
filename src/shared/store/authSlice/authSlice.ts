@@ -12,9 +12,20 @@ export const authSlice = createSlice({
     setLoginInvalidCred(state, action: PayloadAction<boolean>) {
       state.loginInvalidCred = action.payload;
     },
+    setIsAuth(state, action: PayloadAction<boolean>) {
+      state.isAuth = action.payload;
+    },
+    setGeneralErrorLogin(state, action: PayloadAction<boolean>) {
+      state.generalErrorLogin = action.payload;
+    },
   },
 });
 
-export const { setUserAlreadyExist, setLoginInvalidCred } = authSlice.actions;
+export const {
+  setUserAlreadyExist,
+  setLoginInvalidCred,
+  setIsAuth,
+  setGeneralErrorLogin,
+} = authSlice.actions;
 
 export default authSlice.reducer;
